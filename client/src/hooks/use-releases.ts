@@ -4,6 +4,7 @@ import type { Release } from "@shared/schema";
 import { useLocation } from "wouter";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import { uploadToFirebase } from "@/lib/firebase";
 
 // Fetch releases for a specific artist
 export function useReleases(artistId: string) {
@@ -135,17 +136,15 @@ export function useUploadFile() {
 
   return useMutation({
     mutationFn: async (data: { fileData: string; fileName: string; changeType: string }) => {
-      const res = await fetch(api.changeRequests.uploadFile.path, {
-        method: api.changeRequests.uploadFile.method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+      const path = data.changeType === "cover_art" ? "covers" : "audio";
+      const downloadURL = await uploadToFirebase(data.fileData, data.fileName, path);
+      return { filePath: downloadURL };
+    },
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: "File uploaded successfully",
       });
-
-      if (!res.ok) {
-        throw new Error("Failed to upload file");
-      }
-
-      return api.changeRequests.uploadFile.responses[201].parse(await res.json());
     },
     onError: (error) => {
       toast({

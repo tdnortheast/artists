@@ -18,9 +18,9 @@ export async function registerRoutes(
     const { password } = req.body;
 
     if (password === "pass1") {
-      return res.json({ success: true, redirectUrl: "/artist1" });
+      return res.json({ success: true, redirectUrl: "/artist/1" });
     } else if (password === "pass2") {
-      return res.json({ success: true, redirectUrl: "/artist2" });
+      return res.json({ success: true, redirectUrl: "/artist/2" });
     } else {
       return res.json({ success: false, error: "Invalid password" });
     }

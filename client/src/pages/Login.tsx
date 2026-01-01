@@ -2,16 +2,26 @@ import { useState } from "react";
 import { useLogin } from "@/hooks/use-releases";
 import { motion } from "framer-motion";
 import { ArrowRight, Lock, Music } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function Login() {
   const [password, setPassword] = useState("");
+  const [, setLocation] = useLocation();
   const login = useLogin();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password.trim()) {
-      login.mutate(password);
-    }
+      if (password === "pass1") {
+        login.mutate(password, {
+          onSuccess: () => setLocation("/artist/1")
+        });
+      } else if (password === "pass2") {
+        login.mutate(password, {
+          onSuccess: () => setLocation("/artist/2")
+        });
+      } else {
+        login.mutate(password);
+      }
   };
 
   return (

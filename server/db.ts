@@ -10,5 +10,7 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+export const pool = new Pool({ 
+  connectionString: "postgresql://authenticated@ep-sweet-river-ae87aive.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require" 
+});
 export const db = drizzle(pool, { schema });

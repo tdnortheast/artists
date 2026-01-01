@@ -12,12 +12,11 @@ function Router() {
     <Switch>
       <Route path="/" component={Login} />
       
-      <Route path="/artist1">
-        <ArtistPage artistId="artist1" artistName="Yuno $weez" />
-      </Route>
-
-      <Route path="/artist2">
-        <ArtistPage artistId="artist2" artistName="J@M@R" />
+      <Route path="/artist/:id">
+        {(params) => {
+          const artistName = params.id === "1" ? "Yuno $weez" : "J@M@R";
+          return <ArtistPage artistId={`artist${params.id}`} artistName={artistName} />;
+        }}
       </Route>
 
       <Route component={NotFound} />
