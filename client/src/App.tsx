@@ -14,6 +14,7 @@ function Router() {
       
       <Route path="/artist/:id">
         {(params) => {
+          // params.id will be "1" or "2" based on the URL /artist/1 or /artist/2
           const artistName = params.id === "1" ? "Yuno $weez" : "J@M@R";
           return <ArtistPage artistId={`artist${params.id}`} artistName={artistName} />;
         }}

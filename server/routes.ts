@@ -22,7 +22,7 @@ export async function registerRoutes(
     } else if (password === "pass2") {
       return res.json({ success: true, redirectUrl: "/artist/2" });
     } else {
-      return res.json({ success: false, error: "Invalid password" });
+      return res.status(401).json({ success: false, error: "Invalid password" });
     }
   });
 
