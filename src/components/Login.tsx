@@ -76,9 +76,6 @@ export default function Login({ onLogin }: LoginProps) {
             {isLoading ? 'Authenticating...' : 'Login'}
           </button>
 
-          <p className="text-slate-500 text-xs text-center mt-6">
-            Demo passwords: yuno123 or jamar123
-          </p>
         </form>
       </div>
     </div>
